@@ -9,6 +9,10 @@ let bird = document.querySelector('.bird');
 
 // Getting bird element properties
 let bird_props = bird.getBoundingClientRect();
+
+//Assigining intial bird element properties here which will be used to reset vaule incase of a game restart
+let inital_bird_props = bird_props;
+
 let background =
 	document.querySelector('.background')
 		.getBoundingClientRect();
@@ -34,6 +38,7 @@ document.addEventListener('keydown', (e) => {
 			.forEach((e) => {
 				e.remove();
 			});
+		bird_props = inital_bird_props;
 		bird.style.top = '40vh';
 		game_state = 'Play';
 		message.innerHTML = '';
@@ -42,6 +47,7 @@ document.addEventListener('keydown', (e) => {
 		play();
 	}
 });
+
 function play() {
 	function move() {
 
@@ -114,8 +120,8 @@ function play() {
 
 		if (bird_props.top <= 0 ||
 			bird_props.bottom >= background.bottom) {
-			game_state = 'End';
 			message.innerHTML = 'Press Enter To Restart';
+			game_state = 'End';
 			message.style.left = '28vw';
 			return;
 		}
@@ -161,3 +167,4 @@ function play() {
 	}
 	requestAnimationFrame(create_pipe);
 }
+
